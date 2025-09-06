@@ -1,30 +1,25 @@
-# Senior Care Website (Next.js + Tailwind)
+﻿# Robin’s Touch Senior Care Website
 
-A clean, production-ready starter for a senior-care landing site, built with Next.js App Router, Tailwind, framer-motion, and lucide-react.
+Next.js 14 + Tailwind site for Robin’s Touch Senior Care.
 
-## Quick Start
-
+## Quick start
 ```bash
-pnpm install   # or npm i / yarn
-pnpm dev       # or npm run dev / yarn dev
-```
+npm install
+npm run dev
 
-Open http://localhost:3000
+cd "C:\Users\Robin Miller\Documents\Projects\senior-care-website"
 
-## Pages
+@'
+# Robin’s Touch Senior Care Website
 
-- `/` Home (Hero → Services → CTA → Pricing → Areas → Testimonials)
-- `/services`
-- `/pricing`
-- `/about`
-- `/contact` (with contact details and a booking form)
-- `/request` (standalone booking page)
+Next.js 14 + Tailwind CSS site for Robin’s Touch Senior Care.
 
-## API
+## Quick start
+npm install
+npm run dev
 
-- `GET /api/testimonials?page=1&pageSize=6` — paginated testimonials (static data in `lib/testimonials.js`)
-- `POST /api/booking` — accepts booking form JSON and returns a confirmation. (For real email/CRM, integrate Zapier, Formspree, or a server email service.)
-
-## Deployment
-
-- Works on Vercel/Netlify/Render. No special config required.
+## Scripts
+- dev – start local server
+- build – production build
+- start – run production build
+- lint – run eslint
