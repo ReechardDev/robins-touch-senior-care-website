@@ -1,40 +1,52 @@
 // components/plan-card.jsx
 export default function PlanCard({ plan }) {
+  const link = `/request?plan=${encodeURIComponent(plan.name)}&price=${encodeURIComponent(
+    plan.price || ""
+  )}&unit=${encodeURIComponent(plan.unit || "")}`;
+
   return (
-    <div className="relative flex flex-col rounded-3xl border border-emerald-200/40 bg-white p-6 md:p-7 shadow-sm hover:shadow transition">
+    <article
+      className={`relative h-full flex flex-col rounded-3xl border bg-white p-5 md:p-6 shadow-sm hover:shadow transition ${
+        plan.highlight ? "border-emerald-300 ring-1 ring-emerald-600/10" : "border-emerald-200/40"
+      }`}
+    >
       {plan.popular && (
-        <div className="absolute -top-2 left-4 rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white">
+        <span className="absolute -top-2 left-4 rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-semibold text-white shadow">
           Most popular
-        </div>
+        </span>
       )}
 
-      <h3 className="text-lg md:text-xl font-semibold text-slate-900">{plan.name}</h3>
-      <p className="mt-1 text-sm text-gray-600">{plan.note}</p>
+      <h3 className="text-base md:text-lg font-semibold text-slate-900">{plan.name}</h3>
+      {plan.note ? <p className="mt-1 text-xs md:text-sm text-gray-600">{plan.note}</p> : null}
 
-      {/* Price pill */}
-      <div className="mt-4 inline-flex items-center rounded-full bg-emerald-50 px-3 py-1.5 ring-1 ring-emerald-200/60 text-emerald-700 font-semibold tabular-nums">
-        {plan.price}
-      </div>
+      {(plan.price || plan.unit) && (
+        <p className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+          {plan.price}
+          {plan.unit ? <span className="text-sm md:text-base font-medium text-slate-500">/{plan.unit}</span> : null}
+        </p>
+      )}
 
-      {/* Features */}
-      <ul className="mt-5 space-y-3">
-        {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2.5">
-            <span className="mt-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-white text-[10px]">✓</span>
-            <span className="text-gray-700 leading-snug">{f}</span>
-          </li>
-        ))}
-      </ul>
+      {Array.isArray(plan.features) && plan.features.length > 0 && (
+        <ul className="mt-4 space-y-2">
+          {plan.features.map((f, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-white text-[10px]">✓</span>
+              <span className="text-[13px] md:text-sm text-gray-700 leading-snug">{f}</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {/* Breathing room before CTA */}
-      <div className="mt-8 pt-4 border-t border-emerald-100/60">
+      <div className="mt-5 md:mt-auto pt-1">
         <a
-          href="/contact"
-          className="inline-flex rounded-xl border border-emerald-600 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-50 hover:shadow-sm transition"
+          href={link}
+          className="inline-flex rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
         >
-          Request Care
+          Quick request
         </a>
       </div>
-    </div>
+
+      {plan.footnote && <p className="mt-3 text-[11px] text-slate-500">{plan.footnote}</p>}
+    </article>
   );
 }
