@@ -18,7 +18,7 @@ export default function Header() {
   const isActive = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+ <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
         {/* Logo / Brand */}
         <Link href="/" className="inline-flex items-center gap-2">

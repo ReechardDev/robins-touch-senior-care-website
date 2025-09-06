@@ -65,7 +65,7 @@ export default function HomePage() {
             filter: "grayscale(20%)",
           }}
         />
-        <div className="absolute inset-0 -z-10 bg-emerald-50/60" />
+        <div className="absolute inset-0 -z-10 bg-cream-50/60" />
 
         <div className="container-max">
           <div className="py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
@@ -88,7 +88,7 @@ export default function HomePage() {
                   return (
                     <span
                       key={label}
-                      className="inline-flex items-center gap-2 rounded-full bg-emerald-50/60 text-slate-800 border border-white/70 px-4 py-2 text-xs font-semibold shadow-sm"
+                      className="inline-flex items-center gap-2 rounded-full bg-white-800/60 text-slate-800 border border-white/70 px-4 py-2 text-xs font-semibold shadow-sm"
                     >
                       <Icon aria-hidden className="w-4 h-4" /> {label}
                     </span>
@@ -97,7 +97,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative h-80 md:h-[420px] rounded-3xl border shadow-xl bg-grey-50/60 backdrop-blur overflow-hidden">
+            <div className="relative h-80 md:h-[420px] rounded-3xl border shadow-xl bg-#f7faf9-250/60 backdrop-blur overflow-hidden">
               <Image
                 src={SITE.hero.portraitUrl}
                 alt="Caregiver portrait"
@@ -112,7 +112,7 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-16 md:py-24 bg-grey">
+      <section id="services" className="py-16 md:py-24 bg-#f7faf9">
         <div className="container-max">
           <SectionTitle
             kicker="Services"
@@ -126,7 +126,7 @@ export default function HomePage() {
                 className="card p-6 hover:bg-grey-50/60 hover:shadow-md transition-all duration-200"
               >
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 rounded-2xl p-3 bg-emerald-50 border">
+                  <div className="shrink-0 rounded-2xl p-3 bg-white-50 border">
                     <Icon aria-hidden className="w-5 h-5 text-teal-700" />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ export default function HomePage() {
       {/* MID CTA */}
       <section className="py-12 md:py-16 bg-teal-50/60 border-y" id="request-cta">
         <div className="container-max">
-          <div className="card bg-emerald p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="card bg-cream p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
               <h3 className="text-xl md:text-2xl font-extrabold text-slate-900">
                 Ready to get started?
@@ -165,7 +165,7 @@ export default function HomePage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="py-16 md:py-24 bg-emerald">
+      <section id="pricing" className="py-16 md:py-24 bg-teal-250">
         <div className="container-max">
           <SectionTitle
             kicker="Pricing"
@@ -186,7 +186,7 @@ export default function HomePage() {
       </section>
 
       {/* AREAS */}
-      <section id="areas" className="py-16 md:py-24 bg-emerald 300 border-y">
+      <section id="areas" className="py-16 md:py-24 bg-cream 300 border-y">
         <div className="container-max">
           <div className="max-w-5xl mx-auto text-center">
             <SectionTitle
@@ -203,7 +203,7 @@ export default function HomePage() {
       <TestimonialList />
 
      {/* CONTACT PREVIEW + BOOKING */}
-<section id="contact" className="bg-[#b8f2e3]/25 py-12 md:py-16">
+<section id="contact" className="bg-[cream]/25 py-12 md:py-16">
   <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-center">
     <div className="text-center md:text-left">
       <SectionTitle
@@ -215,7 +215,6 @@ export default function HomePage() {
     <BookingForm />
   </div>
 </section>
-
     </div>
   );
 }
