@@ -117,7 +117,7 @@ export default function PricingPage() {
             {addons.map((a) => (
               <div
                 key={a.title}
-                className="rounded-3xl border border-emerald-200/40 bg-white p-6 md:p-7 shadow-sm hover:shadow transition"
+                className="rounded-3xl border border-emerald-200/40 bg-cream p-6 md:p-7 shadow-sm hover:shadow transition"
               >
                 <h3 className="text-base md:text-lg font-semibold text-slate-900">{a.title}</h3>
                 <ul className="mt-3 space-y-2.5">

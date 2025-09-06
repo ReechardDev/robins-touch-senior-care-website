@@ -17,7 +17,7 @@ const services = [
 
 function ServiceCard({ item }) {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-7 shadow-sm hover:shadow transition-shadow">
+    <div className="rounded-3xl border border-gray-200 bg-cream p-6 md:p-7 shadow-sm hover:shadow transition-shadow">
       <h3 className="text-lg md:text-xl font-semibold">{item.title}</h3>
       <p className="mt-2 text-gray-600 leading-relaxed">{item.blurb}</p>
       <ul className="mt-5 space-y-2.5">
@@ -64,7 +64,7 @@ export default function ServicesPage() {
                 { step: "2", title: "Custom care plan", text: "We propose hours, tasks, and scheduling that fit your family." },
                 { step: "3", title: "Care begins", text: "Matched caregiver starts. We check in and adjust as needs evolve." },
               ].map((b) => (
-                <div key={b.step} className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div key={b.step} className="rounded-3xl border border-gray-200 bg-cream p-5 shadow-sm">
                   <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-medium">{b.step}</div>
                   <h3 className="mt-3 font-semibold">{b.title}</h3>
                   <p className="mt-2 text-gray-600 text-sm leading-relaxed">{b.text}</p>
