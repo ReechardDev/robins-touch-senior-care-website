@@ -1,9 +1,9 @@
 // app/pricing/page.js
 
 export const metadata = {
-  title: "Pricing | Senior Care Website",
+  title: "Pricing | Robin’s Touch Senior Care (Denver, CO)",
   description:
-    "Simple, transparent care options. Choose a plan and customize with add-ons.",
+    "Simple, transparent care pricing in the Denver Metro. Hourly companion care, daily support, and overnight options. Book a free assessment.",
 };
 
 const plans = [
@@ -11,6 +11,7 @@ const plans = [
     name: "Hourly Companion Care",
     note: "Flexible daytime support",
     price: "$30",
+    unit: "hr",
     features: [
       "Conversation & light activities",
       "Light housekeeping & meals",
@@ -21,7 +22,8 @@ const plans = [
   {
     name: "Daily Support",
     note: "Most families choose this",
-    price: "$150",
+    price: "$100",
+    unit: "day",
     features: [
       "Personal care & mobility help",
       "Meal prep & routine support",
@@ -32,13 +34,15 @@ const plans = [
   {
     name: "Overnight / 24-hr Care",
     note: "Continuous safety & reassurance",
-    price: "$80",
+    price: "$150",
+    unit: "hr",
     features: [
       "Bedtime & morning routines",
       "Nighttime assistance",
       "Frequent safety checks",
     ],
     popular: false,
+    footnote: "*Adjusts for live-in or 24-hr blocks.",
   },
 ];
 
@@ -59,18 +63,23 @@ const addons = [
 
 function PlanCard({ plan }) {
   return (
-    <div className="relative flex flex-col rounded-3xl border border-emerald-200/40 bg-white p-6 md:p-7 shadow-sm hover:shadow transition">
+    <div
+      className={`relative flex flex-col rounded-3xl border bg-white p-6 md:p-7 shadow-sm hover:shadow transition
+        ${plan.popular ? "border-emerald-300 ring-1 ring-emerald-600/10" : "border-emerald-200/40"}`}
+    >
       {plan.popular && (
-        <div className="absolute -top-2 left-4 rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white">
+        <div className="absolute -top-2 left-4 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow">
           Most popular
         </div>
       )}
+
       <h3 className="text-lg md:text-xl font-semibold text-slate-900">{plan.name}</h3>
       <p className="mt-1 text-sm text-gray-600">{plan.note}</p>
 
-      <div className="mt-4 rounded-xl border border-emerald-200/60 bg-emerald-50/40 px-4 py-2 inline-block text-sm font-medium text-emerald-700">
+      <p className="mt-4 text-4xl font-bold tracking-tight text-slate-900">
         {plan.price}
-      </div>
+        <span className="text-base font-medium text-slate-500">/{plan.unit}</span>
+      </p>
 
       <ul className="mt-5 space-y-2.5">
         {plan.features.map((f, i) => (
@@ -81,14 +90,18 @@ function PlanCard({ plan }) {
         ))}
       </ul>
 
-      <div className="mt-6 md:mt-auto pt-1 border-t border-transparent">
+      <div className="mt-6 md:mt-auto pt-1">
         <a
-          href="/contact"
-          className="inline-flex rounded-xl border border-emerald-600 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-50 hover:shadow-sm transition"
+          href="/request"
+          className="inline-flex rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
         >
           Request Care
         </a>
       </div>
+
+      {plan.footnote && (
+        <p className="mt-3 text-xs text-slate-500">{plan.footnote}</p>
+      )}
     </div>
   );
 }
@@ -97,8 +110,8 @@ export default function PricingPage() {
   return (
     <main className="bg-[#f7faf9]">
       {/* PRICING + ADD-ONS (one page before footer) */}
-      <section className="bg-[#b8f2e3]/25 py-12 md:py-16">
-        <div className="mx-auto max-w-7xl px-4">
+      <section className="bg-slate-50 py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="text-[11px] font-medium tracking-wider text-emerald-700">PRICING</span>
           <h1 className="mt-2 text-3xl md:text-4xl font-semibold text-slate-900">Simple options, personalized care</h1>
           <p className="mt-3 max-w-2xl text-gray-600">
@@ -112,7 +125,7 @@ export default function PricingPage() {
             ))}
           </div>
 
-          {/* Add-ons grid with CTA inline (Billing removed) */}
+          {/* Add-ons grid with CTA inline */}
           <div className="mt-12 grid gap-7 md:grid-cols-3 items-stretch">
             {addons.map((a) => (
               <div
@@ -137,8 +150,8 @@ export default function PricingPage() {
             <div className="md:col-span-3 text-center">
               <div className="inline-flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="/contact"
-                  className="inline-flex rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-medium text-white hover:bg-emerald-700"
+                  href="/request"
+                  className="inline-flex rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700"
                 >
                   Book a free assessment
                 </a>
