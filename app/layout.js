@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 export const metadata = {
   title: "Senior Care Website",
   description: "Compassionate senior care in Denver Metro.",
+  robots: { index: false, follow: false }, // ← add this line
 };
 
 export default function RootLayout({ children }) {
