@@ -1,54 +1,88 @@
-import { ShieldCheck, ClipboardCheck, Sparkles, MapPin, Phone, Mail } from "lucide-react";
-import { SITE } from "@/lib/config";
-import Link from "next/link";
+"use client";
 
-export default function Footer() {
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ShieldCheck, Award, Phone, Mail, ArrowRight } from "lucide-react";
+import { SITE } from "@/lib/config";
+
+function SmallLink({ href, children }) {
+  const pathname = usePathname();
+  const active = pathname === href || (href !== "/" && pathname?.startsWith(href));
   return (
-    <footer id="contact" className="bg-emerald-50/60 border-t mt-16">
-      <div className="container-max">
-        <div className="py-12 grid md:grid-cols-3 gap-10">
-          <div>
-            <h4 className="font-extrabold text-slate-900">{SITE.brandName}</h4>
-            <p className="p-muted mt-2 max-w-sm">
-              Compassionate Senior Care across Denver Metro.
+    <Link
+      href={href}
+      className={[
+        "text-xs md:text-sm leading-none transition underline-offset-4 whitespace-nowrap",
+        active ? "text-emerald-700 underline decoration-2"
+               : "text-slate-500 hover:text-slate-800 hover:underline",
+      ].join(" ")}
+    >
+      {children}
+    </Link>
+  );
+}
+
+export default function Footer({ compact = true }) {
+  const phone = SITE?.phone || "+17206908765";
+  const phoneDisplay = SITE?.phoneDisplay || "(720) 690-8765";
+  const email = SITE?.email || "hello@robinstouch.com";
+
+  return (
+    <footer className={["border-t bg-white", compact ? "py-5 md:py-6" : "py-8"].join(" ")}>
+      <div className="wrap">
+        {/* Single row on md+: left (brand+badges) | center (nav) | right (actions) */}
+        <div className="flex flex-col gap-3 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center">
+          {/* Left: brand + badges inline */}
+          <div className="flex items-center gap-3">
+            <p className="text-sm font-semibold text-slate-900 leading-none">
+              Robin’s Touch Senior Care
             </p>
-            <div className="mt-3 text-sm text-slate-700">
-              <p className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" /> CPR‑Certified</p>
-              <p className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4" /> Background Check</p>
-              <p className="flex items-center gap-2"><Sparkles className="w-4 h-4" /> 25+ years experience</p>
+            <div className="hidden md:flex items-center gap-2">
+              <span className="inline-flex h-7 items-center gap-1.5 rounded-full border bg-emerald-50 px-3 text-[11px] font-medium text-emerald-800 leading-none">
+                <ShieldCheck className="h-3.5 w-3.5" /> CPR Certified
+              </span>
+              <span className="inline-flex h-7 items-center gap-1.5 rounded-full border bg-emerald-50 px-3 text-[11px] font-medium text-emerald-800 leading-none">
+                <Award className="h-3.5 w-3.5" /> 25+ Years
+              </span>
             </div>
           </div>
 
-          <div>
-            <h5 className="font-semibold text-slate-900">Contact</h5>
-            <ul className="mt-3 space-y-1 text-slate-700 text-sm">
-              <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {SITE.city}</li>
-              <li>
-                <a className="inline-flex items-center gap-2 hover:text-teal-700" href={`tel:${SITE.phone}`}>
-                  <Phone className="w-4 h-4" /> {SITE.phoneDisplay}
-                </a>
-              </li>
-              <li>
-  <a className="inline-flex items-center gap-2 hover:text-teal-700" href={`mailto:${SITE.email}`}>
-    <Mail className="w-4 h-4" /> {SITE.email}
-  </a>
-</li>
-            </ul>
-          </div>
+          {/* Center: menu (same baseline) */}
+          <nav className="flex items-center justify-center gap-3 md:gap-4 whitespace-nowrap leading-none">
+            <SmallLink href="/">Home</SmallLink>
+            <SmallLink href="/services">Services</SmallLink>
+            <SmallLink href="/pricing">Pricing</SmallLink>
+            <SmallLink href="/request-care">Request Care</SmallLink>
+            <SmallLink href="/contact">Contact</SmallLink>
+          </nav>
 
-          <div>
-            <h5 className="font-semibold text-slate-900">Quick Links</h5>
-            <ul className="mt-3 space-y-1 text-slate-700 text-sm">
-              <li><Link className="hover:text-teal-700" href="/services">Services</Link></li>
-              <li><Link className="hover:text-teal-700" href="/pricing">Pricing</Link></li>
-              <li><Link className="hover:text-teal-700" href="/request">Request Care</Link></li>
-            </ul>
+          {/* Right: phone/email/CTA inline */}
+          <div className="flex items-center justify-start md:justify-end gap-3 md:gap-4 leading-none">
+            <a
+              href={`tel:${phone.replace(/[^\d+]/g, "")}`}
+              className="inline-flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900"
+            >
+              <Phone className="h-4 w-4" /> {phoneDisplay}
+            </a>
+            <a
+              href={`mailto:${email}`}
+              className="inline-flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900"
+            >
+              <Mail className="h-4 w-4" /> {email}
+            </a>
+            <Link
+              href="/request-care"
+              className="inline-flex h-9 md:h-10 items-center gap-1.5 rounded-xl bg-emerald-600 px-4 text-white text-sm font-medium hover:bg-emerald-700"
+            >
+              Request Care <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
 
-        <div className="border-t py-6 text-center text-xs text-slate-500">
-          © 2025 Robin’s Touch Senior Care. All rights reserved.
-        </div>
+        {/* Tiny copyright below, no extra nav */}
+        <p className="mt-3 text-center md:text-left text-xs text-slate-500">
+          © {new Date().getFullYear()} Robin’s Touch Senior Care
+        </p>
       </div>
     </footer>
   );

@@ -1,3 +1,5 @@
+// app/page.js
+import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/config";
 import SectionTitle from "@/components/section-title";
@@ -12,7 +14,7 @@ import {
   HeartHandshake,
   Clock,
 } from "lucide-react";
-import PlanCard from '@/components/plan-card';
+import PlanCard from "@/components/plan-card";
 import TestimonialList from "@/components/testimonial-list";
 import BookingForm from "@/components/booking-form";
 
@@ -164,57 +166,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PRICING */}
-      <section id="pricing" className="py-16 md:py-24 bg-teal-250">
-        <div className="container-max">
-          <SectionTitle
-            kicker="Pricing"
-            title="Care Plan"
-            subtitle={SITE.pricingNote}
-          />
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {SITE.plans.map((p) => (
-              <PlanCard key={p.name} plan={p} />
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <a href="/request" className="btn btn-primary">
-              Request Care
-            </a>
-          </div>
-        </div>
-      </section>
+    {/* MERGED: PRICING + AREAS SERVED (compact, no CTA under Care Plan) */}
+<section
+  id="pricing-areas"
+  className="py-10 md:py-12 border-y"
+  style={{ backgroundColor: "#f7faf9" }} // light gray
+>
+  <div className="container-max">
+    {/* Pricing header (compact) */}
+    <SectionTitle
+      kicker="Pricing"
+      title="Care Plan"
+      subtitle={SITE.pricingNote}
+    />
 
-      {/* AREAS */}
-      <section id="areas" className="py-16 md:py-24 bg-cream 300 border-y">
-        <div className="container-max">
-          <div className="max-w-5xl mx-auto text-center">
-            <SectionTitle
-              kicker="Areas Served"
-              title={SITE.areas.join(" · ")}
-              subtitle="More areas by request"
-            />
-            <Button href="/request">Request Care</Button>
-          </div>
+    {/* Plan cards only (no global CTA) */}
+    <div className="grid md:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
+      {SITE.plans.map((p) => (
+        <div key={p.name} className="transform scale-95 md:scale-95">
+          <PlanCard plan={p} />
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+
+  {/* Full-bleed cream band for Areas Served (tighter spacing + smaller heading) */}
+  <div
+    className="mt-8 w-full border-t border-emerald-200"
+    style={{ backgroundColor: "#fff9f0" }} // cream, edge-to-edge
+  >
+    <div className="container-max py-8 md:py-10">
+      <p className="text-center text-[11px] font-semibold tracking-widest text-emerald-700">
+        AREAS SERVED
+      </p>
+      <h3 className="mt-2 text-center font-extrabold text-slate-900 text-2xl md:text-4xl leading-tight max-w-5xl mx-auto">
+        {SITE.areas.join(" · ")}
+      </h3>
+      <p className="mt-2 text-center text-slate-600">More areas by request</p>
+
+      {/* Single CTA lives here (funnels to /pricing) */}
+      <div className="text-center mt-4">
+        <Button href="/pricing">Request Care</Button>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* TESTIMONIALS */}
       <TestimonialList />
 
-     {/* CONTACT PREVIEW + BOOKING */}
-<section id="contact" className="bg-[cream]/25 py-12 md:py-16">
-  <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-center">
-    <div className="text-center md:text-left">
-      <SectionTitle
-        kicker="Contact"
-        title="Request a quote or book a visit"
-        subtitle="Transparent pricing, flexible scheduling, and friendly support."
-      />
-    </div>
-    <BookingForm />
-  </div>
-</section>
+      {/* CONTACT PREVIEW + BOOKING */}
+      <section id="contact" className="bg-[cream]/25 py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-center">
+          <div className="text-center md:text-left">
+            <SectionTitle
+              kicker="Contact"
+              title="Request a quote or book a visit"
+              subtitle="Transparent pricing, flexible scheduling, and friendly support."
+            />
+          </div>
+          <BookingForm />
+        </div>
+      </section>
     </div>
   );
 }

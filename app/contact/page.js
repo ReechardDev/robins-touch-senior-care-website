@@ -13,7 +13,7 @@ export default function ContactPage() {
     <main className="bg-[#f7faf9]">
       <section className="py-12 md:py-16">
         <div className="container-max">
-          <div className="card bg-emerald-50/60 p-6 md:p-10">
+          <div className="card bg-#white-50/60 p-6 md:p-10">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               {/* Centered heading + subheading */}
               <div className="md:self-center">
