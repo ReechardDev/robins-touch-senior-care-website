@@ -16,7 +16,7 @@ export default function RequestPage({ searchParams }) {
   const hasSelected = Boolean(selected.plan);
 
   return (
-    <main className="bg-[#f7faf9]">
+    <main className="bg-[#cream]">
       <section className="py-12 md:py-16">
         <div className="mx-auto max-w-3xl px-4">
           <span className="text-[11px] font-medium tracking-wider text-emerald-700">BOOK ONLINE</span>
@@ -27,7 +27,7 @@ export default function RequestPage({ searchParams }) {
 
           {hasSelected && (
             <div className="mt-6 flex items-center justify-center">
-              <div className="rounded-2xl border border-emerald-300/60 bg-emerald-50/60 px-4 py-2 text-sm text-emerald-800">
+              <div className="rounded-2xl border border-emerald-300/60 bg-cream-50/60 px-4 py-2 text-sm text-emerald-800">
                 Selected plan: <strong>{selected.plan}</strong>
                 {selected.price && selected.unit ? (
                   <> — {selected.price}/<span className="uppercase">{selected.unit}</span></>
