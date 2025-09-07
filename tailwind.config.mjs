@@ -7,12 +7,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        // soft cream (optional, if you still want it)
-        cream: "rgb(255 249 240 / <alpha-value>)",
-        // brand background white
-        brandwhite: "#f7faf9",
-      },
+      colors: { brandwhite: "#f7faf9" },
     },
   },
   plugins: [],

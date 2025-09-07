@@ -2,22 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Root + base */
 :root { --radius: 1.25rem; }
 
-/* Brand background + base text */
 html, body { @apply bg-brandwhite text-slate-800; }
 
-/* Utilities */
 .container-max { @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8; }
-.card { @apply rounded-3xl border bg-white shadow-sm; } /* white cards on brand bg */
+.card { @apply rounded-3xl border bg-white shadow-sm; }
 
 .btn {
-  @apply inline-flex items-center justify-center rounded-full px-5 py-3
-         text-sm font-semibold transition
+  @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition
          focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 }
-/* Only emerald + slate (no teal) */
 .btn-primary   { @apply bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:ring-emerald-600; }
 .btn-secondary { @apply bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50 focus-visible:ring-emerald-600; }
 
@@ -26,12 +21,11 @@ html, body { @apply bg-brandwhite text-slate-800; }
 .h3      { @apply text-lg font-bold text-slate-900; }
 .p-muted { @apply text-slate-600; }
 
-/* Consistent layout utilities (pricing-like rhythm) */
 @layer components {
-  .section       { @apply py-16 md:py-20 lg:py-24; }  /* default */
-  .section-tight { @apply py-12 md:py-16 lg:py-20; }  /* “fits one page” */
+  .section       { @apply py-16 md:py-20 lg:py-24; }
+  .section-tight { @apply py-12 md:py-16 lg:py-20; }
   .wrap          { @apply mx-auto max-w-6xl px-4; }
   .wrap-narrow   { @apply mx-auto max-w-4xl px-4; }
-  .card-pad      { @apply p-5 md:p-6; }               /* no oversized p-8 */
+  .card-pad      { @apply p-5 md:p-6; }
   .hflow         { @apply space-y-6 md:space-y-8; }
 }
