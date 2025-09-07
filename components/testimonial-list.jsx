@@ -1,47 +1,67 @@
 "use client";
-import { useEffect, useState } from "react";
-import SectionTitle from "@/components/section-title";
-import Button from "@/components/button";
 
-export default function TestimonialList() {
+import { useCallback, useEffect, useState } from "react";
+
+export default function TestimonialList({ page = 1, pageSize = 6 }) {
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const pageSize = 6;
+  const [status, setStatus] = useState("idle");
 
-  async function load(p = 1) {
-    const res = await fetch(`/api/testimonials?page=${p}&pageSize=${pageSize}`);
-    const data = await res.json();
-    setItems(p === 1 ? data.items : [...items, ...data.items]);
-    setHasMore(data.hasMore);
+  const load = useCallback(async () => {
+    setStatus("loading");
+    try {
+      const res = await fetch(`/api/testimonials?page=${page}&pageSize=${pageSize}`, {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed to load testimonials");
+      const data = await res.json();
+      setItems(Array.isArray(data?.items) ? data.items : []);
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  }, [page, pageSize]);
+
+  useEffect(() => {
+    load();
+  }, [load]); // eslint-satisfied; load is memoized
+
+  if (status === "error") {
+    return (
+      <section className="section-tight">
+        <div className="wrap">
+          <p className="p-muted">Testimonials are unavailable right now.</p>
+        </div>
+      </section>
+    );
   }
 
-  useEffect(() => { load(1); }, []);
+  const skeletons = Array.from({ length: pageSize }, (_, i) => ({ id: `s-${i}` }));
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-white">
-      <div className="container-max">
-        <SectionTitle
-          kicker="Testimonials"
-          title="Families trust Robin’s Touch"
-          subtitle="Real experiences from clients across Denver Metro"
-        />
-        <div className="grid md:grid-cols-3 gap-6">
-          {items.map((t, i) => (
-            <figure key={i} className="card p-6 bg-emerald-50/60">
-              <blockquote className="text-slate-800">“{t.quote}”</blockquote>
-              <figcaption className="p-muted mt-3">— {t.name}, {t.city}</figcaption>
-            </figure>
+    <section className="section-tight">
+      <div className="wrap">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {(status === "loading" ? skeletons : items).map((t, idx) => (
+            <article key={t.id ?? idx} className="card card-pad">
+              {status === "loading" ? (
+                <div className="animate-pulse space-y-3">
+                  <div className="h-3 w-28 bg-emerald-100 rounded" />
+                  <div className="h-3 w-full bg-emerald-100 rounded" />
+                  <div className="h-3 w-3/4 bg-emerald-100 rounded" />
+                </div>
+              ) : (
+                <>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    “{t.quote ?? t.text ?? ""}”
+                  </p>
+                  <div className="mt-3 text-xs text-slate-500">
+                    — {t.author ?? t.name ?? "Client"}
+                  </div>
+                </>
+              )}
+            </article>
           ))}
-        </div>
-        <div className="text-center mt-8">
-          {hasMore ? (
-            <Button variant="secondary" onClick={() => { const np = page + 1; setPage(np); load(np); }}>
-              Load more testimonials
-            </Button>
-          ) : (
-            <p className="p-muted text-sm">No more testimonials.</p>
-          )}
         </div>
       </div>
     </section>

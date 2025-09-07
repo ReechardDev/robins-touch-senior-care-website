@@ -13,8 +13,9 @@ function SmallLink({ href, children }) {
       href={href}
       className={[
         "text-xs md:text-sm leading-none underline-offset-4 whitespace-nowrap transition",
-        active ? "text-emerald-700 underline decoration-2"
-               : "text-slate-500 hover:text-slate-800 hover:underline",
+        active
+          ? "text-emerald-700 underline decoration-2"
+          : "text-slate-500 hover:text-slate-800 hover:underline",
       ].join(" ")}
     >
       {children}
@@ -30,12 +31,12 @@ export default function Footer({ compact = true }) {
   return (
     <footer className={`border-t bg-white ${compact ? "py-5 md:py-6" : "py-8"}`}>
       <div className="wrap">
-        {/* md+: left (brand + badges under) | center (2 links) | right (email over phone) */}
+        {/* md+: left (brand+badges under) | center (2 links) | right (email over phone) */}
         <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-start">
-          {/* LEFT: brand with badges beneath */}
+          {/* LEFT */}
           <div className="space-y-2">
             <p className="text-sm font-semibold text-slate-900 leading-none">
-              Robin's Touch Senior Care
+              Robin&apos;s Touch Senior Care
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="inline-flex h-7 items-center gap-1.5 rounded-full border bg-emerald-50 px-3 text-[11px] font-medium text-emerald-800 leading-none">
@@ -47,13 +48,13 @@ export default function Footer({ compact = true }) {
             </div>
           </div>
 
-          {/* CENTER: exactly two links, aligned to top */}
+          {/* CENTER */}
           <nav className="flex items-start justify-center gap-4 leading-none">
             <SmallLink href="/">Home</SmallLink>
             <SmallLink href="/request">Request Care</SmallLink>
           </nav>
 
-          {/* RIGHT: email on top, phone under */}
+          {/* RIGHT */}
           <div className="flex flex-col items-start md:items-end gap-2 leading-none">
             <a
               href={`mailto:${email}`}
@@ -71,7 +72,7 @@ export default function Footer({ compact = true }) {
         </div>
 
         <p className="mt-3 text-center md:text-left text-xs text-slate-500">
-          © {new Date().getFullYear()} Robin's Touch Senior Care
+          © {new Date().getFullYear()} Robin&apos;s Touch Senior Care
         </p>
       </div>
     </footer>
